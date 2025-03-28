@@ -1,0 +1,31 @@
+name: Generate Image Index
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+
+      - name: Generate index.html
+        run: |
+          python generate_index.py
+
+      - name: Commit and push index.html
+        run: |
+          git config user.name "alfyn-bot"
+          git config user.email "alfyn-bot@example.com"
+          git add index.html
+          git commit -m "Auto-update index.html" || echo "No changes"
+          git push
