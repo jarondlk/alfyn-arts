@@ -2,7 +2,7 @@ import os
 from pathlib import Path
 
 base_dir = Path("assets")
-image_exts = [".png", ".jpg", ".jpeg"]
+image_exts = [".png", ".jpg", ".jpeg", ".gif"]
 folders = sorted(
     [f for f in base_dir.iterdir() if f.is_dir() and f.name[:4].isdigit()],
     reverse=True
