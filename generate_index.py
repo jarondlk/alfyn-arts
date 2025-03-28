@@ -1,8 +1,9 @@
 import os
 from pathlib import Path
 
+base_dir = Path("assets")
 image_exts = [".png", ".jpg", ".jpeg"]
-folders = sorted([f for f in Path(".").iterdir() if f.is_dir() and f.name[:4].isdigit()])
+folders = sorted([f for f in base_dir.iterdir() if f.is_dir() and f.name[:4].isdigit()])
 
 html = [
     "<!DOCTYPE html>",
@@ -27,7 +28,8 @@ for folder in folders:
         html.append(f"<h2>{folder.name}</h2>")
         html.append("<div class='img-grid'>")
         for image in images:
-            src = f"{folder.name}/{image.name}"
+            # use relative path from root to assets folder
+            src = f"{folder.parent.name}/{folder.name}/{image.name}"
             html.append(f"<img src='{src}' alt='{image.name}'>")
         html.append("</div>")
 
